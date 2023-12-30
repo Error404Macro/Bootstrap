@@ -9,10 +9,12 @@
 <br>
 <br>
 <nav class="nav flex-column">
-    <a class="nav-link active" href="#!" th:text="${user.roles[0].name}"></a>
-    <!--<a class="nav-link" href="#!" th:if="${user.roles.size() > 1}"
-       th:text="${user.roles[1].name}"
-       th:href="@{'/user' + ${user.id}}"></a>-->
+    <a class="nav-link active" href="#!" th:text="${user.roles[0].name}"
+       th:if="${user.roles.size() > 0 && user.roles[0].name != 'ADMIN'}"></a>
+    <a class="nav-link" href="#!" th:if="${user.roles.size() > 1}"
+       th:text="${user.roles[1].name}"></a>
+    <a class="nav-link" href="#!" th:if="${user.roles.size() > 0 && user.roles[0].name == 'ADMIN'}"
+       th:text="${user.roles[0].name}" th:href="@{/admin}"></a>
 </nav>
 <div class="container">
     <nav class="navbar fixed-top navbar-dark bg-primary">

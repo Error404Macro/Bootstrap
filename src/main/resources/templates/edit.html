@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>Edit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <style>
+        .selectpicker {
+            width: 438px; /* Задайте нужную ширину здесь */
+        }
+    </style>
+
 </head>
 <body>
 
@@ -28,11 +36,10 @@
         </div>
 
         <div class="form-group">
-            <label>Select role:</label>
-            <br/>
-            <div th:each="roles : ${role}" class="form-check form-check-inline">
-                <input type="checkbox" name="roles" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '') + ' '}" th:field="*{roles}" class="form-check-input"/>
-            </div>
+            <label for="roleSelect">Select role:</label>
+            <select class="form-control selectpicker" id="roleSelect" name="roles" multiple data-live-search="true" data-size="5">
+                <option th:each="roles : ${role}" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '')}"></option>
+            </select>
         </div>
 
         <div class="modal-footer d-flex justify-content-between align-items-center">
