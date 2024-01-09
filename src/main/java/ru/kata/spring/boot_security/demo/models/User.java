@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class User implements UserDetails {
 
     @Id

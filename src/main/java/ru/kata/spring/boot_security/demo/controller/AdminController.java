@@ -33,9 +33,14 @@ public class AdminController {
 
         return "users";
     }*/
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    @GetMapping("")
+    public String getAllUsers(ModelMap modelMap, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findUserByUsername(username);
+        modelMap.addAttribute("usersList", userService.findAll());
+        modelMap.addAttribute("currentUser", currentUser);
+
+        return "users";
     }
 
 
