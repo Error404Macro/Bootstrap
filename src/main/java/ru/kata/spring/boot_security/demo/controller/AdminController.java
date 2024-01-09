@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,21 +33,16 @@ public class AdminController {
 
         return "users";
     }*/
-    @GetMapping("")
-    public String getAllUsers(ModelMap modelMap, Principal principal) {
-        String username = principal.getName();
-        User currentUser = userService.findUserByUsername(username);
-        modelMap.addAttribute("usersList", userService.findAll());
-        modelMap.addAttribute("currentUser", currentUser);
-
-        return "users";
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public String addUser(@ModelAttribute(value = "user") User user) {
-        userService.save(user);
 
-        return "redirect:/admin";
+    @PostMapping()
+    public User addUser(@RequestBody User user) {
+        userService.save(user);
+        return user;
     }
 
     @GetMapping("/create")
