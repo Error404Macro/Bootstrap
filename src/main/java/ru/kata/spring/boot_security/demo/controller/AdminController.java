@@ -44,10 +44,11 @@ public class AdminController {
     }
 
 
-    @PostMapping()
-    public User addUser(@RequestBody User user) {
+    @PostMapping("/create")
+    public String addUser(@ModelAttribute(value = "user") User user) {
         userService.save(user);
-        return user;
+
+        return "redirect:/admin";
     }
 
     @GetMapping("/create")

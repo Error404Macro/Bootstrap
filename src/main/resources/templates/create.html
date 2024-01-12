@@ -71,13 +71,6 @@
         <input type="text" th:field="*{password}" id="password" required/>
         <p style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</p>
 
-
-        <!--<div class="form-group">
-            <label for="roleSelect">Select role:</label>
-            <select class="form-control" id="roleSelect" name="roles">
-                <option th:each="roles : ${role}" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '')}"></option>
-            </select>
-        </div>-->
         <div class="form-group">
             <label for="roleSelect">Select role:</label>
             <select class="form-control selectpicker" id="roleSelect" name="roles" multiple data-live-search="true" >
